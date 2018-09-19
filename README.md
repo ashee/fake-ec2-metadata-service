@@ -113,3 +113,36 @@ curl http://169.254.169.254/latest/meta-data/local-hostname
 curl http://169.254.169.254/latest/meta-data/iam/security-credentials/
 curl http://169.254.169.254/latest/meta-data/iam/security-credentials/default
 ```
+
+# Amitava's additional notes
+## /etc/pf.anchors
+./pf-conf contains a copy of /etc/pf.anchors/* from my machine
+
+## Stop Application Firewall
+Go to Apple System Preference (top-left corner) -> Security & Privacy
+
+Turn-off firewall
+
+## reload pf rules
+```
+sudo pfctl -F all -f /etc/pf.conf
+sudo pfctl -E
+```
+## Run sinatra app
+```
+BIND_ADDR=127.0.0.1 ruby ec2-metadata-service.rb
+```
+
+## tcpdump - debug if you need to monitor pf rules
+### Create pflog interface
+```
+sudo ifconfig pflog0 create
+```
+### Monitor pflog interface
+```
+sudo tcpdump -n -e -ttt -i pflog0 dst 169.254.169.254
+```
+### Delete pflog interface
+```
+$ sudo ifconfig pflog0 destroy
+```

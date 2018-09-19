@@ -9,9 +9,10 @@ require 'time'
 require 'tilt/erb'
 
 set :bind, ENV['BIND_ADDR'] || '169.254.169.254'
-set :port, '80'
+set :port, '8169'
 
-creds_file = '/opt/aws/credentials'
+# creds_file = '/Users/ashee/.aws.orig/credentials'
+creds_file = '/Users/ashee/.aws/credentials'
 docker_range = IPAddr.new('172.17.42.1/16')
 
 get '/latest/meta-data/local-ipv4' do
@@ -24,7 +25,8 @@ get '/latest/meta-data/local-ipv4' do
 end
 
 get '/latest/meta-data/local-hostname' do
-  `hostname`
+  # `hostname`
+  "127.0.0.1"
 end
 
 get '/latest/meta-data/instance-id' do
