@@ -132,6 +132,10 @@ sudo pfctl -E
 ```
 BIND_ADDR=127.0.0.1 ruby ec2-metadata-service.rb
 ```
+## Test
+```
+curl http://169.254.169.254/latest/meta-data/local-ipv4
+```
 
 ## tcpdump - debug if you need to monitor pf rules
 ### Create pflog interface
